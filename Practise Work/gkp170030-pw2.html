@@ -1,0 +1,183 @@
+<!Doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+  input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      background-color:#F0F0F0;
+  }
+  input[type=email] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      background-color:#F0F0F0;
+  }
+  input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      background-color:#F0F0F0;
+  }
+  </style>
+<script>
+var valfnam=false;
+var vallnam=false;
+var valmail=false;
+var valpswd=false;
+
+function isEmail(email) {
+var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+return regex.test(email);
+}
+
+function check_fname(){
+var a= $("#fname").val();
+if(a==null||a=="")
+{
+$("#fname").css("background-color","red");
+valfnam=false;
+}
+else
+{
+  $("#fname").css("background-color","#F0F0F0");
+  valfnam=true;
+}
+}
+
+function check_lname()
+{
+var b= $("#lname").val();
+if(b==null||b=="")
+{
+  $("#lname").css("background-color","red");vallnam=false;
+}
+else{
+  $("#lname").css("background-color","#F0F0F0");vallnam=true;
+}
+}
+
+function check_mail()
+{
+var c= $("#mail1").val();
+if(!isEmail(c))
+{
+  $("#mail1").css("background-color","red");valmail=false;
+}
+else{
+  $("#mail1").css("background-color","#F0F0F0");valmail=true;
+}
+}
+
+function check_pswd(){
+  var d= $("#iPassword").val();
+  var e= $("#CPassword").val();
+  if(d!==e||d==null||e==null||d==""||e=="")
+  {
+    $("#CPassword").css("background-color","red");
+  $("#iPassword").css("background-color","red");valpswd=false;
+}
+  else
+  {
+    $("#iPassword").css("background-color","#F0F0F0");
+  $("#CPassword").css("background-color","#F0F0F0");valpswd=true;
+}
+}
+$(document).ready(function(){
+  $("#fname").focusout(function(){
+    check_fname();
+  });
+  $("#lname").focusout(function(){
+    check_lname();
+  });
+  $("#mail1").focusout(function(){
+    check_mail();
+  });
+  $("#iPassword").focusout(function(){
+    check_pswd();
+  });
+  $("#CPassword").focusout(function(){
+    check_pswd();
+  });
+
+$("form").submit(function(event){
+event.preventDefault();
+
+valfnam=false;
+vallnam=false;
+valmail=false;
+valpswd=false;
+
+var isChecked = $('#gridCheck1').is(':checked');
+
+check_fname();
+check_lname();
+check_mail();
+check_pswd();
+if(valfnam===false || isChecked===false || valpswd===false || valmail===false || vallnam===false){
+  alert("Please check the highlighted area");
+  return false;
+}
+else
+{
+alert("Registration Successful");
+return true;
+}
+});});
+  </script>
+  </head>
+<body>
+  <br>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+      </div>
+      <div class="col-6">
+  <h1><b>Sign Up</b></h1>
+  <p style="color:grey">Please fill in this form to create an account!</p>
+  <hr>
+  <form>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <input type="text" class="form-control" placeholder="First name" id="fname">
+    </div>
+    <div class="col-md-3 mb-3">
+      <input type="text" class="form-control" placeholder="Last name" id="lname">
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-md-6 mb-3">
+    <input type="email" class="form-control" placeholder="Email" id="mail1">
+  </div>
+</div>
+  <div class="row">
+  <div class="col-md-6 mb-3">
+    <input type="password" class="form-control" placeholder="Password" id="iPassword">
+  </div>
+</div>
+  <div class="row">
+  <div class="col-md-6 mb-3">
+    <input type="password" class="form-control" placeholder="Confirm Password" id="CPassword">
+  </div>
+</div>
+  <div class="checkbox">
+        <label><input type="checkbox" id="gridCheck1">
+          <font color=grey>I accept the</font> <font color=#3090C7>Terms of Use & Privacy Policy</font>
+        </label>
+      </div>
+
+      <button class="btn btn-primary" type="submit"><b>Sign Up</b></button>
+      <p id="output" class="error"></p>
+</form>
+</div>
+</body>
